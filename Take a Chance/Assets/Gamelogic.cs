@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 using UnityEngine.UI;
 
 public class CharacterImport
@@ -32,10 +33,19 @@ public class Gamelogic : MonoBehaviour
 {
     public Character currentCharacter;
     public GameObject cardEffectPanel;
+    public Dropdown cardEffectDropdown;
+    public Dropdown cardEffectDropdown2;
+    public Dropdown cardEffectDropdownHalf;
+    public Text cardEffectTopText;
+    public InputField cardEffectInput;
+    public CardEffect cardEffect;
     public List<Character> characters;
     void Start()
     {
+        //cardEffectDropdown = cardEffectPanel.GetComponentInChildren<Dropdown>();
+        SetupCardEffectUI();
         ReadCharacterInfo();
+        
     }
 
     void Update()
@@ -48,4 +58,30 @@ public class Gamelogic : MonoBehaviour
         CharacterImport temp = JsonUtility.FromJson<CharacterImport>(File.ReadAllText(Application.dataPath + "/characters.json"));
         characters = temp.characters;
     }
+    void SetupCardEffectUI()
+    {
+        cardEffectDropdown.ClearOptions();
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Hair Color"));
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Age"));
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Shyness"));
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Laziness"));
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Clumsiness"));
+        cardEffectDropdown.options.Add(new Dropdown.OptionData("Kindness"));
+
+        cardEffectDropdown2.ClearOptions();
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Hair Color"));
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Age"));
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Shyness"));
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Laziness"));
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Clumsiness"));
+        cardEffectDropdown2.options.Add(new Dropdown.OptionData("Kindness"));
+
+        /*cardEffectDropdown.options.Clear();
+        foreach (var name in Enum.GetNames(typeof(CardTypes)))
+        {
+            cardEffectDropdown.options.Add(new Dropdown.OptionData(name));
+        }*/
+
+    }
+    
 }

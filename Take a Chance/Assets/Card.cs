@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardTypes
+{
+    HotCold, Compare, HalfHalf, Rumor, Guess, Ask, RedFlags, NothingSpecial, Offset
+}
 public class Card : MonoBehaviour
 {
     
-    public enum CardTypes
-    {
-        HotCold,Compare,HalfHalf,Rumor,Guess,Ask,RedFlags,NothingSpecial,Offset
-    }
+    
     // Start is called before the first frame update
     [SerializeField]
     public CardTypes cardType;
@@ -29,7 +30,7 @@ public class Card : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !used)
         {
-            CardEffect();
+            CardEffectStart();
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             //gameObject.GetComponent<Rigidbody>().AddForce()
             used = true;
@@ -37,13 +38,32 @@ public class Card : MonoBehaviour
         }
         
     }
-    void CardEffect()
+    void CardEffectStart()
     {
         switch (cardType)
         {
-            case (int)CardTypes.HotCold:
-
+            case CardTypes.HotCold:
                 break;
+            case CardTypes.Compare:
+                break;
+            case CardTypes.HalfHalf:
+                gamelogic.cardEffectDropdownHalf.gameObject.SetActive(true);
+                break;
+            case CardTypes.Rumor:
+                break;
+            case CardTypes.Guess:
+                break;
+            case CardTypes.Ask:
+                break;
+            case CardTypes.RedFlags:
+                break;
+            case CardTypes.NothingSpecial:
+                break;
+            case CardTypes.Offset:
+                break;
+
         }
+        gamelogic.cardEffectPanel.SetActive(true);
+        gamelogic.cardEffectDropdown.gameObject.SetActive(true);
     }
 }
