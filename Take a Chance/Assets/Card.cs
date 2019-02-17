@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CardInfoImport
-{
-    public List<CardInfo> cards;
-}
-[System.Serializable]
-public class CardInfo
-{
-    public string name;
-}
 public class Card : MonoBehaviour
 {
+    
+    public enum CardTypes
+    {
+        HotCold,Compare,HalfHalf,Rumor,Guess,Ask,RedFlags,NothingSpecial,Offset
+    }
     // Start is called before the first frame update
-    bool isPickedUp = false;
-    public int player = -1;
-    public GameObject cardPicture;
+    [SerializeField]
+    public CardTypes cardType;
+    bool used = false;
+    Gamelogic gamelogic;
     void Start()
     {
         
@@ -27,25 +23,27 @@ public class Card : MonoBehaviour
     void Update()
     {
         
-        if (isPickedUp)
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5.99f));
-            transform.position = mousePos;
-            transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-        }
-        if (Input.GetKeyUp(KeyCode.Mouse0) && isPickedUp)
-        {
-            isPickedUp = false;
-            transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
-        }
+       
     }
     void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !used)
         {
-            isPickedUp = true;
+            CardEffect();
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            //gameObject.GetComponent<Rigidbody>().AddForce()
+            used = true;
             
         }
         
+    }
+    void CardEffect()
+    {
+        switch (cardType)
+        {
+            case (int)CardTypes.HotCold:
+
+                break;
+        }
     }
 }

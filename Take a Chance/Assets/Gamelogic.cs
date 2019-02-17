@@ -2,43 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
-public class Player
+public class CharacterImport
+{
+    public List<Character> characters;
+}
+public class Character
 {
     public string name { get; set; }
-    public int health { get; set; }
-    public int mana { get; set; }
-    public List<Card> cards { get; set; }
-    public Player(string name)
+    public Stats stats;
+
+    public Character()
     {
-        this.name = name;
-        health = 10;
-        mana = 0;
-        cards = new List<Card>();
+
     }
+}
+public class Stats
+{
+    public Color hairColor;
+    public int age;
+    public int shyness;
+    public int seriousness;
+    public int laziness;
+    public int clumsiness;
+    public int kindness;
 }
 public class Gamelogic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Player player1;
-    public Player player2;
-    public List<CardInfo> cardInfos;
+    public Character currentCharacter;
+    public GameObject cardEffectPanel;
+    public List<Character> characters;
     void Start()
     {
-        player1 = new Player("player1");
-        player2 = new Player("player2");
-        ReadCardInfo();
+        ReadCharacterInfo();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
-    void ReadCardInfo()
+    void ReadCharacterInfo()
     {
-        cardInfos = new List<CardInfo>();
-        CardInfoImport temp = JsonUtility.FromJson<CardInfoImport>(File.ReadAllText(Application.dataPath + "/cards.json"));
-        cardInfos = temp.cards;
+        characters = new List<Character>();
+        CharacterImport temp = JsonUtility.FromJson<CharacterImport>(File.ReadAllText(Application.dataPath + "/characters.json"));
+        characters = temp.characters;
     }
 }

@@ -1,0 +1,17 @@
+{
+  "characters": [
+    {
+      "name": "cardiB",
+	  "stats":
+	  {
+		"hairColor":{"r":0,"g":0,"b":0,"a":1},
+		"age":18,
+		"shyness":3,
+		"seriousness":5,
+		"laziness":-4,
+		"clumsiness":-3,
+		"kindness":5
+	  }
+    }
+  ]
+}
