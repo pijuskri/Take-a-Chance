@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
     [SerializeField]
     public CardTypes cardType;
     bool used = false;
-    Gamelogic gamelogic;
+    public Gamelogic gamelogic;
     void Start()
     {
         
@@ -43,6 +43,9 @@ public class Card : MonoBehaviour
         switch (cardType)
         {
             case CardTypes.HotCold:
+                gamelogic.cardEffectTopText.text = "Hot/Cold";
+                gamelogic.cardEffectDropdown.gameObject.SetActive(true);
+                gamelogic.cardEffectInput.gameObject.SetActive(true);
                 break;
             case CardTypes.Compare:
                 break;
@@ -64,6 +67,6 @@ public class Card : MonoBehaviour
 
         }
         gamelogic.cardEffectPanel.SetActive(true);
-        gamelogic.cardEffectDropdown.gameObject.SetActive(true);
+        gamelogic.cardEffect.cardType = cardType;
     }
 }

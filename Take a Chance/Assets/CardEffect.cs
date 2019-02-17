@@ -8,7 +8,7 @@ public class CardEffect : MonoBehaviour
     public Gamelogic gamelogic;
     void Start()
     {
-        
+        ClosePanel();
     }
 
     // Update is called once per frame
@@ -16,7 +16,7 @@ public class CardEffect : MonoBehaviour
     {
         
     }
-    void DoCardEffect()
+    public void DoCardEffect()
     {
         int statChosen = gamelogic.cardEffectDropdown.value;
         int input = int.Parse(gamelogic.cardEffectInput.text);
@@ -32,6 +32,7 @@ public class CardEffect : MonoBehaviour
                 else
                 {
                     int diff = Mathf.Abs(input - stat);
+                    if(statChosen==1) diff = Mathf.Abs(FromAgeToPoints(input) - stat);
                     if (diff == 0 || diff == 1) text = "hot";
                     else if (diff >=2 && diff <= 3) text = "warm";
                     else if (diff >= 4 && diff <= 5) text = "neutral";
@@ -53,37 +54,55 @@ public class CardEffect : MonoBehaviour
                 stat = GetStatFromID(statChosen);
                 if (gamelogic.cardEffectDropdownHalf.value == 0)
                 {
-                    if (stat >= 0) text = "correct";
+                    if (stat >= 0) { text = "correct"; gamelogic.points++; }
                     else text = "false";
                 }
                 else
                 {
-                    if (stat <= 0) text = "correct";
+                    if (stat <= 0) { text = "correct"; gamelogic.points++; }
                     else text = "false";
                 }
                     break;
             case CardTypes.Rumor:
+                int rnd = Random.Range(0,7);
+                stat = GetStatFromID(rnd);
+                text = ""+stat;
                 break;
             case CardTypes.Guess:
                 break;
             case CardTypes.Ask:
+                stat = GetStatFromID(statChosen);
+                text = "" + stat;
                 break;
             case CardTypes.RedFlags:
                 break;
             case CardTypes.NothingSpecial:
                 break;
             case CardTypes.Offset:
+
                 break;
 
         }
-        gamelogic.cardEffectTopText.text = text;
+        gamelogic.cardEffectAnswerText.text = text;
+        gamelogic.cardEffectButton.interactable = false;
     }
-    public int GetStatFromID(int id)//number only
+    public void ClosePanel()
+    {
+        gamelogic.cardEffectButton.interactable = true;
+        gamelogic.cardEffectDropdown.gameObject.SetActive(false);
+        gamelogic.cardEffectDropdown2.gameObject.SetActive(false);
+        gamelogic.cardEffectDropdownHalf.gameObject.SetActive(false);
+        gamelogic.cardEffectInput.gameObject.SetActive(false);
+        gamelogic.cardEffectPanel.gameObject.SetActive(false);
+
+    }
+    public int GetStatFromID(int id)//no hair color
     {
         int answer = -1;
+        Debug.Log(Mathf.RoundToInt((gamelogic.currentCharacter.stats.age - 18) / 5 - 5));
         switch (id)
         {
-            case 1: answer = Mathf.RoundToInt(gamelogic.currentCharacter.stats.age-18/5-5); break;//age is from 18-60
+            case 1: answer = FromAgeToPoints(gamelogic.currentCharacter.stats.age); break;//age is from 18-60
             case 2: answer = gamelogic.currentCharacter.stats.shyness; break;
             case 3: answer = gamelogic.currentCharacter.stats.seriousness; break;
             case 4: answer = gamelogic.currentCharacter.stats.laziness; break;
@@ -92,6 +111,12 @@ public class CardEffect : MonoBehaviour
 
         }
         return answer;
+    }
+   
+    
+    public int FromAgeToPoints(int input)
+    {
+        return Mathf.RoundToInt((input - 18) / 5 - 5);
     }
     public int PutColorInRange()
     {
