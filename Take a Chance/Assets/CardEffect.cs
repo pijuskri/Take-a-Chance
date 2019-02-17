@@ -6,6 +6,8 @@ public class CardEffect : MonoBehaviour
 {
     public CardTypes cardType;
     public Gamelogic gamelogic;
+    public float timeToClose=0;
+    bool done = false;
     void Start()
     {
         ClosePanel();
@@ -14,17 +16,22 @@ public class CardEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timeToClose -= Time.deltaTime;
+        if (done && timeToClose < 0)
+        {
+            ClosePanel();
+        }
     }
     public void DoCardEffect()
     {
         int statChosen = gamelogic.cardEffectDropdown.value;
-        int input = int.Parse(gamelogic.cardEffectInput.text);
+        int input; 
         int stat = -1;
         string text = "";
         switch (cardType)
         {
             case CardTypes.HotCold:
+                input = int.Parse(gamelogic.cardEffectInput.text);
                 stat = GetStatFromID(statChosen);
                 if (stat == -1)
                 {
@@ -85,9 +92,12 @@ public class CardEffect : MonoBehaviour
         }
         gamelogic.cardEffectAnswerText.text = text;
         gamelogic.cardEffectButton.interactable = false;
+        done = true;
+        timeToClose = 3;
     }
     public void ClosePanel()
     {
+        done = false;
         gamelogic.cardEffectButton.interactable = true;
         gamelogic.cardEffectDropdown.gameObject.SetActive(false);
         gamelogic.cardEffectDropdown2.gameObject.SetActive(false);

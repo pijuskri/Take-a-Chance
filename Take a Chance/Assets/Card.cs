@@ -48,6 +48,9 @@ public class Card : MonoBehaviour
                 gamelogic.cardEffectInput.gameObject.SetActive(true);
                 break;
             case CardTypes.Compare:
+                gamelogic.cardEffectTopText.text = "Compare";
+                gamelogic.cardEffectDropdown.gameObject.SetActive(true);
+                gamelogic.cardEffectDropdown2.gameObject.SetActive(true);
                 break;
             case CardTypes.HalfHalf:
                 gamelogic.cardEffectDropdownHalf.gameObject.SetActive(true);
