@@ -50,8 +50,18 @@ public class CardEffect : MonoBehaviour
 
                 break;
             case CardTypes.HalfHalf:
-                if(input=="")
-                break;
+                stat = GetStatFromID(statChosen);
+                if (gamelogic.cardEffectDropdownHalf.value == 0)
+                {
+                    if (stat >= 0) text = "correct";
+                    else text = "false";
+                }
+                else
+                {
+                    if (stat <= 0) text = "correct";
+                    else text = "false";
+                }
+                    break;
             case CardTypes.Rumor:
                 break;
             case CardTypes.Guess:

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -322,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 680a042f632977c479dc8b40555e79d5, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1515,7 +1515,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 680a042f632977c479dc8b40555e79d5, type: 2}
+  - {fileID: 2100000, guid: 60027656d5291684db25ca6fc2b0a70d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   cardEffectPanel: {fileID: 0}
   cardEffectDropdown: {fileID: 0}
   cardEffectDropdown2: {fileID: 0}
+  cardEffectDropdownHalf: {fileID: 0}
   cardEffectTopText: {fileID: 0}
   cardEffectInput: {fileID: 0}
   cardEffect: {fileID: 0}
